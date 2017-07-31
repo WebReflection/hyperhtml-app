@@ -1,0 +1,32 @@
+{
+  "name": "hyperhtml-app",
+  "version": "0.0.0",
+  "description": "Express like routing for hyperHTML",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run browserify && npm run minify && npm run size",
+    "browserify": "browserify index.js -o bundle.js",
+    "minify": "uglifyjs bundle.js --comments=/^!/ --compress --mangle -o min.js",
+    "size": "cat bundle.js | wc -c;cat min.js | wc -c;gzip -c min.js | wc -c",
+    "test": "phantomjs test/testrunner.js"
+  },
+  "keywords": [
+    "express",
+    "hyper",
+    "app",
+    "hyperhtml",
+    "routing"
+  ],
+  "author": "Andrea Giammarchi",
+  "license": "ISC",
+  "dependencies": {
+    "onpushstate": "^0.1.1",
+    "path-to-regexp": "^1.7.0"
+  },
+  "devDependencies": {
+    "browserify": "^14.4.0",
+    "phantomjs-prebuilt": "^2.1.14",
+    "tiny-cdn": "^0.7.0",
+    "uglify-js": "^3.0.27"
+  }
+}

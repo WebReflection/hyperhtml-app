@@ -1,0 +1,95 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>.ok { background-color: rgb(0, 255, 170); }</style>
+<script src="https://unpkg.com/promise-polyfill@6.0.2/promise.min.js"></script>
+<script src="https://unpkg.com/url-polyfill@1.0.7/url-polyfill.min.js"></script>
+<script src="https://unpkg.com/tressa@0.3.1/tressa.js"></script>
+<script>var hyperHTML = {};</script>
+<script src="../bundle.js"></script>
+<script>
+this.onload = function () {
+  tressa.title('hyperHTML.app()');
+
+  var app = hyperHTML.app();
+  tressa.assert(typeof app === 'object', 'app available');
+
+  tressa.async(function (done) {
+    tressa.log('## testing app.get(...)');
+    var pathname = '/hyper/Andrea/39/get.html';
+    app.get('/hyper/:user/:age/*', function get(ctx, next) {
+      tressa.assert(arguments.length === 2, 'get path invoked');
+      tressa.assert(
+        ctx.params.user === 'Andrea' &&
+        ctx.params.age === '39',
+        'parameters passed'
+      );
+      tressa.assert(typeof next === 'function', 'there is a next()');
+      tressa.log('## testing app.navigate(...)');
+      tressa.assert(location.pathname === pathname, 'pathname is OK');
+      app.delete('/hyper/:user/:age/*', get);
+      tressa.log('## testing app.delete(...)');
+      tressa.assert(app._paths[dirtyKey].cb.length === 0, 'one callback was removed');
+      done();
+    });
+    var dirtyKey = Object.keys(app._paths)[0];
+    tressa.assert(app._paths[dirtyKey].cb.length === 1, 'one callback was added');
+    app.navigate(pathname);
+  })
+  .then(function () {return tressa.async(function (done) {
+    tressa.log('## testing app.use(...)');
+    var pathname = '/hyper/Andrea/39/use.html';
+    app.use('/hyper/:user/:age/*', function use(ctx, next) {
+      tressa.assert(arguments.length === 2, 'use path invoked');
+      tressa.assert(
+        ctx.params.user === 'Andrea' &&
+        ctx.params.age === '39',
+        'parameters passed'
+      );
+      tressa.assert(typeof next === 'function', 'there is a next()');
+      tressa.assert(location.pathname === pathname, 'pathname is OK');
+      app.delete('/hyper/:user/:age/*', use);
+      next();
+      done();
+    });
+    app.navigate(pathname);
+  })})
+  .then(function () {return tressa.async(function (done) {
+    tressa.log('## testing app.param(...)');
+    var times = 0;
+    var pathname = '/hyper/Andrea/39/param.html';
+    app.get('/hyper/:user/:age/*', function get(ctx, next) {
+      tressa.assert(times === 2, 'params invoked before get');
+      tressa.assert(arguments.length === 2, 'get arguments correct');
+      tressa.assert(location.pathname === pathname, 'pathname is OK');
+      app.delete('/hyper/:user/:age/*', get);
+      done();
+    });
+    app.param(['user', 'age'], function param(ctx, next, value) {
+      if (times++) {
+        tressa.assert(
+          value === '39' &&
+          ctx.params.age === value,
+          'age invoked'
+        );
+      } else {
+        tressa.assert(
+          value === 'Andrea' &&
+          ctx.params.user === value,
+          'user invoked'
+        );
+      }
+      next();
+    });
+    app.navigate(pathname);
+  })})
+  .then(function () {
+    app.navigate('/test/');
+    tressa.end();
+    if (!tressa.exitCode) {
+      document.documentElement.className = 'ok';
+    }
+  });
+};
+</script>
+<h3 style="text-align:center;font-family:sans-serif;">if green, it works ✔</h3>
