@@ -26,6 +26,7 @@ Every callback will be invoked with a generic `context` object, a `next` functio
 and in case of `app.param(name, fn)` the value, as third argument, for the specified parameter.
 
 ```js
+var app = require('hyperhtml-app');
 app.get('/', function (ctx) {
   console.log('Welcome');
 });
