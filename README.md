@@ -3,7 +3,7 @@ Express like routing for hyperHTML
 
 [![License: ISC](https://img.shields.io/badge/License-ISC-yellow.svg)](https://opensource.org/licenses/ISC) [![Build Status](https://travis-ci.org/WebReflection/hyperhtml-app.svg?branch=master)](https://travis-ci.org/WebReflection/hyperhtml-app) [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat)](https://github.com/WebReflection/donate)
 
-#### Minimalistic API
+### Minimalistic API
 
 This project uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) module,
 the official Express JS path parser, and it combines it with an Express like API,
@@ -20,7 +20,7 @@ this module has been created to be an ideal companion for the [viperHTML tech fa
   * **app.param(name, callback)** to react once upfront whenever a specific parameter is passed along.
   * **app.navigate(pathname)** to push state and navigate to a different URL via standard History API.
 
-#### Callbacks
+### Callbacks
 
 Every callback will be invoked with a generic `context` object, a `next` function to invoke once everything is OK,
 and in case of `app.param(name, fn)` the value, as third argument, for the specified parameter.
@@ -39,7 +39,7 @@ app.param('user', function (ctx, next, name) {
 app.navigate('/hyper');
 ```
 
-#### Compatibility
+### Compatibility
 
 You can test this library [live](https://webreflection.github.io/hyperhtml-app/test/).
 
