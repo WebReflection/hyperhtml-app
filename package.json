@@ -4,8 +4,8 @@
   "description": "Express like routing for hyperHTML",
   "main": "index.js",
   "scripts": {
-    "build": "npm run browserify && npm run minify && npm run size",
     "browserify": "browserify index.js -o bundle.js",
+    "build": "npm run browserify && npm run minify && npm test && npm run size",
     "minify": "uglifyjs bundle.js --comments=/^!/ --compress --mangle -o min.js",
     "size": "cat bundle.js | wc -c;cat min.js | wc -c;gzip -c min.js | wc -c",
     "test": "phantomjs test/testrunner.js"
@@ -28,5 +28,16 @@
     "phantomjs-prebuilt": "^2.1.14",
     "tiny-cdn": "^0.7.0",
     "uglify-js": "^3.0.27"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WebReflection/hyperhtml-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WebReflection/hyperhtml-app/issues"
+  },
+  "homepage": "https://github.com/WebReflection/hyperhtml-app#readme"
 }

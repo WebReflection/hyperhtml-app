@@ -58,13 +58,17 @@ var hyperHTMLApp = (function () {'use strict';
   };
 
   app.navigate = function navigate(pathname) {
-    var doc = document;
-    var html = doc.documentElement;
-    var navigator = doc.createElement('a');
-    navigator.href = pathname;
-    navigator.onclick = remove;
-    html.insertBefore(navigator, html.firstChild);
-    navigator.click();
+    if (pathname === location.pathname) {
+      this.handleEvent();
+    } else {
+      var doc = document;
+      var html = doc.documentElement;
+      var navigator = doc.createElement('a');
+      navigator.href = pathname;
+      navigator.onclick = remove;
+      html.insertBefore(navigator, html.firstChild);
+      navigator.click();
+    }
     return this;
   };
 
