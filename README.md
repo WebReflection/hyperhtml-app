@@ -18,7 +18,7 @@ this module has been created to be an ideal companion for the [viperHTML tech fa
   * **app.use(path, callback)** to add a generic middleware (similar to `app.get` but it accepts an array of paths)
   * **app.delete(path, callback)** to remove a specific callback
   * **app.param(name, callback)** to react once upfront whenever a specific parameter is passed along.
-  * **app.navigate(pathname)** to push state and navigate to a different URL via standard History API. If the pathname and the search string are the same, it'll trigger a `samestate` type event (as opposite of `popstate` and `pushstate`). If there is a second _options_ parameter and it has a `replace` or `replaceState` truthy property, it will not trigger a navigation event but it will replace the latest history with the current URL (shortcut for `history.replaceState(...)`).
+  * **app.navigate(pathname[, options])** to push state and navigate to a different URL via standard History API. If the pathname and the search string are the same, it'll trigger a `samestate` type event (as opposite of `popstate` and `pushstate`). If there is a second _options_ parameter and it has a `replace` or `replaceState` truthy property, it will not trigger a navigation event but it will replace the latest history with the current URL (shortcut for `history.replaceState(...)`).
 
 ### Callbacks
 
