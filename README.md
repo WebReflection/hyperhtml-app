@@ -26,7 +26,7 @@ Every callback will be invoked with a generic `context` object, a `next` functio
 and in case of `app.param(name, fn)` the value, as third argument, for the specified parameter.
 
 ```js
-app.use('/', function (ctx) {
+app.get('/', function (ctx) {
   console.log('Welcome');
 });
 app.use('/:user', function (ctx, next) {
