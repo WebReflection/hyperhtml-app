@@ -83,6 +83,21 @@ this.onload = function () {
     });
     app.navigate(pathname);
   })})
+  .then(function () {return tressa.async(function (done) {
+    tressa.log('## testing app.navigate(path, {replaceState})');
+    var times = 0;
+    var pathname = '/hyper/Andrea/39/replaceState.html';
+    app.get('/hyper/:user/:age/*', function get(ctx, next) {
+      times++;
+      app.delete('/hyper/:user/:age/*', get);
+      next();
+    });
+    app.navigate(pathname, {replace: true});
+    setTimeout(function () {
+      tressa.assert(!times, 'replaced state did not trigger the router');
+      done();
+    }, 300);
+  })})
   .then(function () {
     app.navigate('/test/');
     tressa.end();

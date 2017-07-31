@@ -57,17 +57,28 @@ var hyperHTMLApp = (function () {'use strict';
     return this;
   };
 
-  app.navigate = function navigate(pathname) {
-    if (pathname === location.pathname) {
-      this.handleEvent();
-    } else {
-      var doc = document;
-      var html = doc.documentElement;
-      var navigator = doc.createElement('a');
-      navigator.href = pathname;
-      navigator.onclick = remove;
-      html.insertBefore(navigator, html.firstChild);
-      navigator.click();
+  app.navigate = function navigate(pathname, options) {
+    switch (true) {
+      case !!options:
+        switch (true) {
+          case !!options.replace:
+          case !!options.replaceState:
+            history.replaceState(history.state, document.title, pathname);
+            break;
+        }
+        break;
+      case pathname === (location.pathname + location.search):
+        this.handleEvent({type: 'samestate'});
+        break;
+      default:
+        var doc = document;
+        var html = doc.documentElement;
+        var navigator = doc.createElement('a');
+        navigator.href = pathname;
+        navigator.onclick = remove;
+        html.insertBefore(navigator, html.firstChild);
+        navigator.click();
+        break;
     }
     return this;
   };
@@ -82,7 +93,10 @@ var hyperHTMLApp = (function () {'use strict';
           var invoked = [];
           var keys = [];
           var params = this._params;
-          var ctx = {params: createParams(match, info.keys)};
+          var ctx = {
+            params: createParams(match, info.keys),
+            type: e.type
+          };
           var i = 0;
           var length = info.cb.length;
           for (key in ctx.params) {
