@@ -1,7 +1,9 @@
 # hyperhtml-app
-Express like routing for hyperHTML
+Express like routing for _pop_ and _push_ states.
 
 [![License: ISC](https://img.shields.io/badge/License-ISC-yellow.svg)](https://opensource.org/licenses/ISC) [![Build Status](https://travis-ci.org/WebReflection/hyperhtml-app.svg?branch=master)](https://travis-ci.org/WebReflection/hyperhtml-app) [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat)](https://github.com/WebReflection/donate)
+
+Designed for [hyperHTML](https://github.com/WebReflection/hyperHTML), it works as **standalone** module too.
 
 ### Minimalistic API
 
@@ -29,15 +31,19 @@ and in case of `app.param(name, fn)` the value, as third argument, for the speci
 var hyperApp = require('hyperhtml-app');
 
 var app = hyperApp();
+
 app.get('/', function (ctx) {
   console.log('Welcome');
 });
+
 app.use('/:user', function (ctx, next) {
   console.log(ctx.params);
 });
+
 app.param('user', function (ctx, next, name) {
   console.log(name); // hyper
 });
+
 app.navigate('/hyper');
 ```
 
