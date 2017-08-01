@@ -9,6 +9,7 @@
 <script src="../bundle.js"></script>
 <script>
 this.onload = function () {
+  var initialPath = location.pathname;
   tressa.title('hyperHTML.app()');
 
   var app = hyperHTML.app();
@@ -99,7 +100,7 @@ this.onload = function () {
     }, 300);
   })})
   .then(function () {
-    app.navigate('/test/');
+    app.navigate(initialPath);
     tressa.end();
     if (!tressa.exitCode) {
       document.documentElement.className = 'ok';
