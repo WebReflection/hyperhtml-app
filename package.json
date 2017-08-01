@@ -1,6 +1,6 @@
 {
   "name": "hyperhtml-app",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Express like routing for hyperHTML",
   "main": "index.js",
   "scripts": {
