@@ -3,6 +3,7 @@
   "version": "0.2.1",
   "description": "Express like routing for hyperHTML",
   "main": "index.js",
+  "unpkg": "min.js",
   "scripts": {
     "browserify": "browserify index.js -o bundle.js",
     "build": "npm run browserify && npm run minify && npm test && npm run size",
