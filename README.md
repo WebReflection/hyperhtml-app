@@ -28,9 +28,9 @@ Every callback will be invoked with a generic `context` object, a `next` functio
 and in case of `app.param(name, fn)` the value, as third argument, for the specified parameter.
 
 ```js
-var hyperApp = require('hyperhtml-app');
+const hyperApp = require('hyperhtml-app');
 
-var app = hyperApp();
+const app = hyperApp();
 
 app.get('/', function (ctx) {
   console.log('Welcome');
@@ -46,6 +46,70 @@ app.param('user', function (ctx, next, name) {
 
 app.navigate('/hyper');
 ```
+
+### Usage
+
+`hyperhtml-app` lets you handle routing as you prefer, but the following is an example of how you might get started.
+
+```js
+const hyperHTML = require('hyperhtml')
+const HyperHTMLApp = require('hyperhtml-app')
+
+/**
+ * Utility
+ */
+function getCurrentRoute() {
+  return window.location.pathname.replace('index.html', '');
+}
+
+/**
+ * Router configuration
+ */
+const routerOutletEl = document.createElement('div');
+const router = new HyperHTMLApp();
+const renderRoute = hyperHTML.bind(routerOutletEl);
+
+router.get('/user/:name', ctx => {
+  const userName = ctx.params.name
+  
+  renderRoute`
+    <h1>Hello ${userName}</h1>
+    <button onclick=${() => router.navigate('/')}>
+      Go back
+    </button>
+  `
+  render()
+});
+router.get('/', () => {
+  renderRoute`
+    <h1>Hello world</h1>
+    <button onclick=${() => router.navigate('/user/Julia')}>
+      See Julia
+    </button>
+    <button onclick=${() => router.navigate('/user/Andrea')}>
+      See Andrea
+    </button>
+  `
+  render()
+});
+
+/**
+ * Declarative render of the application and the active route
+ */
+const html = hyperHTML.bind(document.getElementById('root'))
+function render() {
+  return html`
+    <div>
+      ${routerOutletEl}
+    </div>
+  `;
+}
+
+// Trigger route handler for the initial route
+router.navigate(getCurrentRoute());
+```
+
+[Try it live](https://stackblitz.com/edit/hyperhtml-app)
 
 ### Compatibility
 
