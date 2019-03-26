@@ -23,13 +23,13 @@
   "license": "ISC",
   "dependencies": {
     "onpushstate": "^0.3.1",
-    "path-to-regexp": "^1.7.0"
+    "path-to-regexp": "^3.0.0"
   },
   "devDependencies": {
-    "browserify": "^16.2.2",
+    "browserify": "^16.2.3",
     "phantomjs-prebuilt": "^2.1.16",
     "tiny-cdn": "^0.7.0",
-    "uglify-js": "^3.4.3"
+    "uglify-js": "^3.5.2"
   },
   "directories": {
     "test": "test"

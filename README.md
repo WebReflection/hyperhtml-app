@@ -5,6 +5,16 @@ Express like routing for _pop_ and _push_ states.
 
 Designed for [hyperHTML](https://github.com/WebReflection/hyperHTML), it works as **standalone** module too.
 
+### V1 Breaking Changes
+
+Path-To-RegExp [breaks compatibility with Express <= 4.x](https://github.com/pillarjs/path-to-regexp#compatibility-with-express--4x).
+
+  * RegExp special characters can only be used in a parameter
+    * Express.js 4.x used all RegExp special characters regardless of position - this considered a bug
+  * Parameters have suffixes that augment meaning - *, + and ?. E.g. /:user*
+  * No wildcard asterisk (*) - use parameters instead ((.*))
+
+
 ### Minimalistic API
 
 This project uses [path-to-regexp](https://www.npmjs.com/package/path-to-regexp) module,
