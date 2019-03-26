@@ -22,7 +22,7 @@
   "author": "Andrea Giammarchi",
   "license": "ISC",
   "dependencies": {
-    "onpushstate": "^0.1.1",
+    "onpushstate": "^0.3.1",
     "path-to-regexp": "^1.7.0"
   },
   "devDependencies": {
