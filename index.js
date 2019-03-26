@@ -36,6 +36,10 @@ var hyperHTMLApp = (function () {'use strict';
   };
 
   app.use = function use(mount, cb) {
+    if (typeof mount === 'function') {
+      cb = mount;
+      mount = '(.*)';
+    }
     for (var
       paths = [].concat(mount),
       i = 0, length = paths.length;
