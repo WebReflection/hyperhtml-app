@@ -1,4 +1,9 @@
-# hyperhtml-app
+# hyperhtml-app [deprecated]
+
+This project has been improved, and replaced, by [a-route](https://github.com/WebReflection/a-route#readme).
+
+- - -
+
 Express like routing for _pop_ and _push_ states.
 
 [![License: ISC](https://img.shields.io/badge/License-ISC-yellow.svg)](https://opensource.org/licenses/ISC) [![Build Status](https://travis-ci.org/WebReflection/hyperhtml-app.svg?branch=master)](https://travis-ci.org/WebReflection/hyperhtml-app) [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat)](https://github.com/WebReflection/donate)
